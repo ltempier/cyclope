@@ -22,15 +22,13 @@ void setup() {
 
   Serial.begin(9600);
   while (!Serial) {
-  }
-
+  }  
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to configure Ethernet using DHCP");
   }
 
   delay(1000);
   Serial.println("connecting...");
-
   connectToServer();
 }
 
