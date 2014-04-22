@@ -8,21 +8,20 @@ EthernetClient client;
 
 JsonParser<4> parser;
 String jsonData = "";
-int myStations[] = { 20024, 20025, 20026 };
-int myLedStations[] = { 8, 7, 2 };
+int myStations[] = { 20024, 20025, 20106, 20111, 20028 };
+int myLedStations[] = { 9, 7, 8, 2, 5 };
 
-int led = 8;
 int currentIndex = 0;
 String apiKey = "833f7a451533ba92a04cf8fcbb840fff9612cae8";
 
-const unsigned long requestInterval = 10000; // delay between requests
+const unsigned long requestInterval = 5000; // delay between requests
 unsigned long lastAttemptTime = 0;
 
 boolean startParse = false;
 boolean endParse = false;
 
 void setup() {
-  for (int thisPin = 0; thisPin < 3; thisPin++) { 
+  for (int thisPin = 0; thisPin < 5; thisPin++) { 
     pinMode(myLedStations[thisPin], OUTPUT);
     digitalWrite(myLedStations[thisPin], LOW);   
 
@@ -30,13 +29,15 @@ void setup() {
 
   Serial.begin(9600);
   while (!Serial) {
-  }  
+  }
+
   if (Ethernet.begin(mac) == 0) {
     Serial.println("Failed to configure Ethernet using DHCP");
   }
 
   delay(1000);
   Serial.println("connecting...");
+
   connectToServer();
 }
 
